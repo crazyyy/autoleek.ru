@@ -11,9 +11,9 @@ var gulp = require('gulp'),
   });
 
 /* if work with html == true, else - false */
-var htmlOWp = true,
-  wpThemeName = 'wp-framework',
-  wpDomain = 'wp-framework.dev';
+var htmlOWp = false,
+  wpThemeName = 'material',
+  wpDomain = 'autoleek.dev';
 
 var AUTOPREFIXER_BROWSERS = [
   'ie >= 8', 'ie_mob >= 10', 'ff >= 20', 'chrome >= 24', 'safari >= 5', 'opera >= 12', 'ios >= 7', 'android >= 2.3', '> 1%', 'last 4 versions', 'bb >= 10'
@@ -34,15 +34,15 @@ var paths = {
   images: {
     src: basePaths.src + 'img/',
     srcimg: basePaths.src + 'img/**/*.{png,jpg,jpeg,gif}',
-    dest: basePaths.dest + 'img/'
+    dest: basePaths.dest + 'images/'
   },
   scripts: {
     src: basePaths.src + 'js/**',
-    dest: basePaths.dest + 'js/'
+    dest: basePaths.dest + 'javascripts/'
   },
   styles: {
     src: basePaths.src + 'sass/',
-    dest: basePaths.dest + 'css/'
+    dest: basePaths.dest + 'stylesheets/'
   },
   fonts: {
     src: basePaths.src + 'fonts/**',
@@ -59,7 +59,7 @@ var appFiles = {
 var spriteConfig = {
   imgName: 'sprite.png',
   cssName: '_sprite.scss',
-  imgPath: '../img/' + 'sprite.png'
+  imgPath: '../images/' + 'sprite.png'
 };
 var changeEvent = function (evt) {
   gutil.log('File', gutil.colors.cyan(evt.path.replace(new RegExp('/.*(?=/' + basePaths.src + ')/'), '')), 'was', gutil.colors.magenta(evt.type));
