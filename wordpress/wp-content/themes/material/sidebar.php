@@ -38,5 +38,21 @@
         </div><!-- popular-post-container -->
       </div><!-- widget_popular_post -->
 
+
+      <?php
+        // check if the repeater field has rows of data
+        if( have_rows('video') ):
+          echo '<div class="widget widget-video-post">';
+          while ( have_rows('video') ) : the_row();
+      ?>
+            <?php the_sub_field('iframe'); ?>
+
+      <?php
+          endwhile;
+          echo '</div><!-- /.widget widget-video-post -->';
+          else : endif;
+      ?>
+
+
   </aside> <!-- end sidebar -->
 <?php endif; ?>

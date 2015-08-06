@@ -149,16 +149,19 @@ span {
     display: none;
   }
 }
-.widget_popular_post {
-  display: none;
+.widget-video-post {
+  // display: none;
   width: 274px;
   &.fixed {
     position: fixed;
     top: 30px;
   }
-}
-.single-post {
-  .widget_popular_post {
-    display: block;
+  iframe {
+    max-width: 100%;
   }
 }
+// .single-post {
+//   .widget_popular_post {
+//     display: block;
+//   }
+// }

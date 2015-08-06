@@ -116,7 +116,7 @@ jQuery(document).ready(function (a) {
       })
     }
 
-    var attached = a('.widget_popular_post');
+    var attached = a('.widget-video-post');
     var offset = attached.offset();
     console.log(offset.top);
     a(window).bind('scroll', function () {
