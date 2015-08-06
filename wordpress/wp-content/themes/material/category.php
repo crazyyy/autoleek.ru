@@ -1,4 +1,5 @@
 <?php if (is_category()) {
+
   $this_category = get_category($cat);
 
   if (get_category_children($this_category->cat_ID) != "") {
