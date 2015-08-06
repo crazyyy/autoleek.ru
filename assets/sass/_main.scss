@@ -150,7 +150,7 @@ span {
   }
 }
 .widget-video-post {
-  // display: none;
+  display: none;
   width: 274px;
   &.fixed {
     position: fixed;
@@ -160,8 +160,8 @@ span {
     max-width: 100%;
   }
 }
-// .single-post {
-//   .widget_popular_post {
-//     display: block;
-//   }
-// }
+.single-post {
+  .widget-video-post {
+    display: block;
+  }
+}
