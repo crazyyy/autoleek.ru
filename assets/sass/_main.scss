@@ -1,0 +1,37 @@
+$grey: #626262;
+.site-logo a,
+span {
+  font-family: Palatino Linotype, Palatino;
+}
+
+.site-logo {
+  span {
+    font-size: 16px;
+  }
+  img {
+    position: absolute;
+    bottom: 50px;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .site-logo span {
+    display: none;
+  }
+}
+.site-logo {
+  img {
+    width: 140px;
+    height: 60px;
+  }
+}
+.header-nav{
+  .site-menu {
+    li {
+      border-right: 1px solid #626262;
+      &:last-child {
+        border-right: 0;
+      }
+    }
+  }
+}
