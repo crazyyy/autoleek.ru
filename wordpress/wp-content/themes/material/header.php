@@ -65,14 +65,7 @@
               </div>
               <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse header-nav" id="bs-example-navbar-collapse-1">
-                <?php
-                  wp_nav_menu(
-                    array(
-                      'theme_location' => 'main-menu',
-                      'menu_class' => 'site-menu'
-                    )
-                  );
-                ?>
+                  <?php wpeHeadNav(); ?>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
           </nav>

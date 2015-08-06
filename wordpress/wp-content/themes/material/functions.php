@@ -1,7 +1,7 @@
-<?php 
+<?php
 /**
  * functions.php
- * Based on Adi Purdila's Alpha WordPress Framework 
+ * Based on Adi Purdila's Alpha WordPress Framework
  * @package Theme_Material
  * GPL3 Licensed
  */
@@ -69,14 +69,6 @@ if ( ! function_exists( 'material_setup' ) ) {
 		 */
 		add_theme_support( 'post-thumbnails' );
 
-		/**
-		 * Register nav menus.
-		 */
-		register_nav_menus(
-			array(
-				'main-menu' => __( 'Main Menu', 'material' )
-			)
-		);
 	}
 
 	add_action( 'after_setup_theme', 'material_setup' );
@@ -99,13 +91,13 @@ if ( ! function_exists( 'material_post_meta' ) ) {
 			}
 
 			// Get the date.
-            
+
             printf(
 				'<li class="meta-date">'.__(' Posted on ','material').'<a href="%1$s" rel="date">%2$s</a></li>',
 				esc_url( get_permalink()),
 				get_the_date()
 			);
-            
+
 			// Get the post author.
 			printf(
 				'<li class="meta-author">'.__(' by ','material').'<a href="%1$s" rel="author">%2$s</a></li>',
@@ -122,7 +114,7 @@ if ( ! function_exists( 'material_post_meta2' ) ) {
 		echo '<ul class="list-inline entry-meta">';
 
 		if ( get_post_type() === 'post' ) {
-			
+
 			// The tags.
 			$tag_list = get_the_tag_list( '', ', ' );
 			if ( $tag_list ) {
@@ -139,8 +131,85 @@ if ( ! function_exists( 'material_post_meta2' ) ) {
 		}
 	}
 }
-
-
+// WPE head navigation
+function wpeHeadNav()
+{
+  wp_nav_menu(
+  array(
+    'theme_location'  => 'header-menu',
+    'menu'            => '',
+    'container'       => 'div',
+    'container_class' => 'menu-{menu slug}-container',
+    'container_id'    => '',
+    'menu_class'      => 'menu',
+    'menu_id'         => '',
+    'echo'            => true,
+    'fallback_cb'     => 'wp_page_menu',
+    'before'          => '',
+    'after'           => '',
+    'link_before'     => '',
+    'link_after'      => '',
+    'items_wrap'      => '<ul id="menu-menu" class="site-menu">%3$s</ul>',
+    'depth'           => 0,
+    'walker'          => ''
+    )
+  );
+}
+// WPE footer navigation
+function wpeFootNav() {
+  wp_nav_menu(
+  array(
+    'theme_location'  => 'footer-menu',
+    'menu'            => '',
+    'container'       => 'div',
+    'container_class' => 'menu-{menu slug}-container',
+    'container_id'    => '',
+    'menu_class'      => 'menu',
+    'menu_id'         => '',
+    'echo'            => true,
+    'fallback_cb'     => 'wp_page_menu',
+    'before'          => '',
+    'after'           => '',
+    'link_before'     => '',
+    'link_after'      => '',
+    'items_wrap'      => '<ul class="footernav">%3$s</ul>',
+    'depth'           => 0,
+    'walker'          => ''
+    )
+  );
+}
+// WPE sidebar navigation
+function wpeSideNav() {
+  wp_nav_menu(
+  array(
+    'theme_location'  => 'sidebar-menu',
+    'menu'            => '',
+    'container'       => 'div',
+    'container_class' => 'menu-{menu slug}-container',
+    'container_id'    => '',
+    'menu_class'      => 'menu',
+    'menu_id'         => '',
+    'echo'            => true,
+    'fallback_cb'     => 'wp_page_menu',
+    'before'          => '',
+    'after'           => '',
+    'link_before'     => '',
+    'link_after'      => '',
+    'items_wrap'      => '<ul class="sidebarnav">%3$s</ul>',
+    'depth'           => 0,
+    'walker'          => ''
+    )
+  );
+}
+//  Register WPE Navigation
+function register_html5_menu() {
+  register_nav_menus(array(
+    'header-menu' => __('Меню в шапке', 'wpeasy'),
+    'sidebar-menu' => __('Меню в сайдбар', 'wpeasy'),
+    'footer-menu' => __('Меню в подвал', 'wpeasy')
+  ));
+}
+add_action('init', 'register_html5_menu'); // Add HTML5 Blank Menu
 /**
  * ----------------------------------------------------------------------------------------
  * 6.0 - Display navigation to the next/previous set of posts.
@@ -149,19 +218,19 @@ if ( ! function_exists( 'material_post_meta2' ) ) {
 if ( ! function_exists( 'material_paging_nav' ) ) {
 	function material_paging_nav() { ?>
 		<ul class="pager">
-			<?php 
+			<?php
 				if ( get_next_posts_link() ) : ?>
 				<li class="prev">
-				
+
 					<?php next_posts_link( __( '<i class="fa fa-angle-double-left"></i> Older Posts', 'material' ) ); ?>
 				</li>
 				<?php endif;
 			 ?>
-			<?php 
+			<?php
 				if ( get_previous_posts_link() ) : ?>
 				<li class="nxt">
 					<?php previous_posts_link( __( 'Newer Posts <i class="fa fa-angle-double-right"></i>', 'material' ) ); ?>
-					
+
 				</li>
 				<?php endif;
 			 ?>
@@ -200,7 +269,7 @@ if ( ! function_exists( 'material_widget_init' ) ) {
 					'id' => 'sidebar-2',
 					'description' => __( 'Appears on the footer.', 'material' ),
 					'before_widget' => '<div id="%1$s" class="widget col-md-3 %2$s">',
-                                        'orderby'       => 'id', 
+                                        'orderby'       => 'id',
                                         'after_widget' => '</div> <!-- end widget -->',
 					'before_title' => '<h5 class="widget-title">',
 					'after_title' => '</h5>',
@@ -231,9 +300,9 @@ if ( ! function_exists( 'material_validate_length' ) ) {
  * ----------------------------------------------------------------------------------------
  */
 if ( ! function_exists( 'material_load_wp_head' ) ) {
-	
+
 	function material_load_wp_head() {
-		
+
 		  $banner = get_template_directory_uri()."/images/banner.png";
 		// Add theme support for Custom Header
 		$header_args = array(
@@ -246,7 +315,7 @@ if ( ! function_exists( 'material_load_wp_head' ) ) {
 			'uploads'                => true,
 			'admin-preview-callback' => 'material_admin_header_image_preview',
 		);
-        
+
         $background_args = array(
               'default-color'          => 'eee',
 //            'default-image'          => '',
@@ -258,16 +327,16 @@ if ( ! function_exists( 'material_load_wp_head' ) ) {
 //            'admin-preview-callback' => ''
         );
 
-		function material_admin_header_image_preview(){ 
-			
+		function material_admin_header_image_preview(){
+
 			$header_image = get_header_image();
-			
+
 			if ( ! empty( $header_image ) ) : ?>
 
 			<div id="headimg" style="height: 100px; margin-bottom:-70px; background: #428bca url('<?php header_image(); ?>') no-repeat left top">
 			<?php else : ?>
 
-			<div id="headimg" style="height: 100px; margin-bottom:-70px; background: #428bca url('<?php echo $banner; ?>') no-repeat left top">	
+			<div id="headimg" style="height: 100px; margin-bottom:-70px; background: #428bca url('<?php echo $banner; ?>') no-repeat left top">
 			<?php endif; ?>
 
 			</div>
@@ -284,7 +353,7 @@ if ( ! function_exists( 'material_load_wp_head' ) ) {
 
 
 		}
-	
+
 	add_action( 'after_setup_theme', 'material_load_wp_head' );
 
 }
@@ -322,7 +391,7 @@ if ( ! function_exists( 'material_h5_script' ) ) {
 }
     add_action('wp_head', 'material_h5_script');
 }
-    
+
 /**
  * 11.0
  * Filters wp_title to print a neat <title> tag based on what is being viewed.
@@ -336,7 +405,7 @@ if ( ! function_exists( 'material_name_wp_title' ) ) {
 		if ( is_feed() ) {
 			return $title;
 		}
-		
+
 		global $page, $paged;
 
 		// Add the blog name
@@ -369,7 +438,7 @@ if ( ! function_exists( 'material_editor_styles' ) ) {
 	function material_editor_styles() {
 	    add_editor_style( MATERIAL_THEMEROOT . '/stylesheets/editor.css' );
 	}
-	
+
 	add_action( 'after_setup_theme', 'material_editor_styles' );
 }
 
