@@ -1,4 +1,7 @@
 $grey: #626262;
+$red: #DE1111;
+$blue: #428bca;
+
 .site-logo a,
 span {
   font-family: Palatino Linotype, Palatino;
@@ -44,7 +47,7 @@ span {
 .header-nav {
   .site-menu {
     li {
-      border-right: 1px solid #626262;
+      border-right: 1px solid $red;
       &:last-child {
         border-right: 0;
       }
@@ -92,6 +95,11 @@ span {
   ul {
     li {
       list-style: none;
+      a{
+        &:hover {
+          color: $blue;
+        }
+      }
     }
   }
 }
@@ -101,11 +109,22 @@ span {
   }
   ul {
     li {
+      padding-bottom: 5px;
+      margin-bottom: 5px;
+      border-bottom: 1px solid $red;
       .sub-menu {
         display: none;
+        li {
+          padding-bottom: 0;
+          margin-bottom: 0;
+          border-bottom: 0;
+        }
         &.display {
           display: block;
         }
+      }
+      &:last-child {
+        border-bottom: 0;
       }
     }
   }
@@ -133,12 +152,16 @@ span {
     display: block;
     float: left;
 
-    width: 300px;
+    width: 200px;
     padding: 25px;
     img {
       width: 100%;
       max-height: 250px;
     }
+  }
+  h2 {
+    font-family: Georgia, "Times New Roman", Times, Baskerville, serif;
+    font-size: 24px;
   }
 }
 .form-allowed-tags {
@@ -147,6 +170,12 @@ span {
 .single-post {
   .widget_recent_entries {
     display: none;
+  }
+  .entry-header {
+    h1 {
+      font-size: 28px;
+      font-family: Georgia, "Times New Roman", Times, Baskerville, serif;
+    }
   }
 }
 .widget-video-post {
@@ -163,5 +192,12 @@ span {
 .single-post {
   .widget-video-post {
     display: block;
+  }
+}
+.entry-footer  {
+  .list-inline {
+    &.entry-meta {
+      display: none;
+    }
   }
 }

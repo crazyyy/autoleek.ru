@@ -73,8 +73,30 @@ if ( ! function_exists( 'material_setup' ) ) {
 
 	add_action( 'after_setup_theme', 'material_setup' );
 }
-
-
+function wpeExcerpt10($length) {
+    return 10;
+}
+function wpeExcerpt20($length) {
+    return 20;
+}
+function wpeExcerpt40($length) {
+    return 40;
+}
+function wpeExcerpt($length_callback = '', $more_callback = '')
+{
+    global $post;
+    if (function_exists($length_callback)) {
+        add_filter('excerpt_length', $length_callback);
+    }
+    if (function_exists($more_callback)) {
+        add_filter('excerpt_more', $more_callback);
+    }
+    $output = get_the_excerpt();
+    $output = apply_filters('wptexturize', $output);
+    $output = apply_filters('convert_chars', $output);
+    $output = '<p>' . $output . '</p>';
+    echo $output;
+}
 /**
  * ----------------------------------------------------------------------------------------
  * 5.0 - Display meta information for a specific post.

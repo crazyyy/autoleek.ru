@@ -13,10 +13,11 @@
       <?php dynamic_sidebar( 'sidebar-1' ); ?>
 
       <div class="widget widget_popular_post">
-<!--    <h5 class="widget-title">Популярные записи</h5> -->
+        <h5 class="widget-title">Популярные записи</h5>
         <div class="popular-post-container">
         <?php
           $args = array(
+            'showposts'      => '7',
             'orderby'      => 'meta_value',
             'meta_key'     => 'post_views_count',
             'order'        => 'DESC',

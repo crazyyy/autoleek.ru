@@ -46,7 +46,7 @@
             <?php endif; ?>
           </a><!-- /post thumbnail -->
           <h2><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
-          <?php the_excerpt(); ?>
+          <?php wpeExcerpt('wpeExcerpt20'); ?>
         </article>
 
 
