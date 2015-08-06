@@ -103,8 +103,6 @@ jQuery(document).ready(function (a) {
       }
 
 
-
-
       a(subNavParrent).children('.sub-menu').toggleClass('display');
     });
 
@@ -113,11 +111,20 @@ jQuery(document).ready(function (a) {
       a.getJSON(workUri, function(data, status) {
         var catName = data.name,
           catDescription = data.description;
-        a('.entry-header h1').html(catName);
-        a('.entry-content').html(catDescription);
+          var html = '<article class="page type-page status-publish hentry"><header class="entry-header"><br><h1 style="text-align: center; font-family: Georgia">' + data.name + '</h1></header><div class="entry-content">' + catDescription + '</div></article>';
+        a('.main-content').html(html);
       })
     }
 
-
+    var attached = a('.widget_popular_post');
+    var offset = attached.offset();
+    console.log(offset.top);
+    a(window).bind('scroll', function () {
+      if (a(window).scrollTop() > offset.top - 40) {
+        a(attached).addClass('fixed');
+      } else {
+        a(attached).removeClass('fixed');
+      }
+    });
 
 });

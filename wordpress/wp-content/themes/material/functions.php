@@ -219,6 +219,80 @@ function wpa_category_nav_class( $classes, $item ){
 }
 add_filter( 'nav_menu_css_class', 'wpa_category_nav_class', 10, 2 );
 
+//  Catch first image from post and display it
+function catchFirstImage() {
+  global $post, $posts;
+  $first_img = '';
+  ob_start();
+  ob_end_clean();
+  $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i',
+    $post->post_content, $matches);
+  $first_img = $matches [1] [0];
+  if(empty($first_img)){
+    $first_img = get_template_directory_uri() . '/images/noimage.jpg'; }
+    return $first_img;
+}
+
+function subh_get_post_view( $postID ) {
+ $count_key = 'post_views_count';
+ $count     = get_post_meta( $postID, $count_key, true );
+ if ( $count == '' ) {
+ delete_post_meta( $postID, $count_key );
+ add_post_meta( $postID, $count_key, '0' );
+
+ return '0 View';
+ }
+
+ return $count . ' Views';
+}
+
+/**
+ * To count number of views and store in database.
+ *
+ * @param $postID currently viewed post/page
+ */
+function subh_set_post_view( $postID ) {
+ $count_key = 'post_views_count';
+ $count     = (int) get_post_meta( $postID, $count_key, true );
+ if ( $count < 1 ) {
+ delete_post_meta( $postID, $count_key );
+ add_post_meta( $postID, $count_key, '0' );
+ } else {
+ $count++;
+ update_post_meta( $postID, $count_key, (string) $count );
+ }
+}
+
+/**
+ * Add a new column in the wp-admin posts list
+ *
+ * @param $defaults
+ *
+ * @return mixed
+ */
+function subh_posts_column_views( $defaults ) {
+ $defaults['post_views'] = __( 'Views' );
+
+ return $defaults;
+}
+
+/**
+ * Display the number of views for each posts
+ *
+ * @param $column_name
+ * @param $id
+ *
+ * @return void simply echo out the number of views
+ */
+function subh_posts_custom_column_views( $column_name, $id ) {
+ if ( $column_name === 'post_views' ) {
+ echo subh_get_post_view( get_the_ID() );
+ }
+}
+
+add_filter( 'manage_posts_columns', 'subh_posts_column_views' );
+add_action( 'manage_posts_custom_column', 'subh_posts_custom_column_views', 5, 2 );
+
 
 /**
  * ----------------------------------------------------------------------------------------

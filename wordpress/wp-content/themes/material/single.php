@@ -15,6 +15,7 @@
 <?php get_header(); ?>
 
 	<div class="main-content col-md-9" role="main">
+    <?php subh_set_post_view( get_the_ID() ); ?>
 		<?php while( have_posts() ) : the_post(); ?>
                          <?php get_template_part( 'content', get_post_format() ); ?>
 
