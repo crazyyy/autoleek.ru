@@ -210,6 +210,16 @@ function register_html5_menu() {
   ));
 }
 add_action('init', 'register_html5_menu'); // Add HTML5 Blank Menu
+
+function wpa_category_nav_class( $classes, $item ){
+  if( 'category' == $item->object ){
+    $classes[] = 'menu-category-' . $item->object_id;
+  }
+  return $classes;
+}
+add_filter( 'nav_menu_css_class', 'wpa_category_nav_class', 10, 2 );
+
+
 /**
  * ----------------------------------------------------------------------------------------
  * 6.0 - Display navigation to the next/previous set of posts.

@@ -75,15 +75,49 @@ jQuery(document).ready(function (a) {
 
     /* saitobaza.ru */
 
+    // display parent and subnavs if subnavipage
+    var hiddenNav = a('.menu-widget-container .sub-menu .current-menu-item');
+    hiddenNav.parent().addClass('display');
+
+    // widget variables
     var catTopLink = a( ".widget_nav_menu li.menu-item-has-children a" );
-    var mainContentHeader = a('.main-content .page-header h3');
-    var mainContentBlock = a('.main-content .content-block');
+    // content variables
 
     a(catTopLink).click(function(event) {
-      event.preventDefault();
+
       var subNavParrent = a(this).parent();
+      // get category ID from li (cat parrent link)
+      var ID = subNavParrent.attr('class').match('(menu-category-)[0-9]+')[0].replace('menu-category-', '');
+
+      // check if subnavi
+      if ( a(subNavParrent).parent().hasClass('sub-menu') ==  true) {
+        console.log('true');
+        console.log('id ' + ID);
+      } else {
+        event.preventDefault();
+        a('.page-header').fadeOut();
+        // mb check is current location is category or subcat and dont replace
+        // console.log('http://' + window.location.hostname + '/');
+        // window.location.replace('http://' + window.location.hostname + '/');
+        getParentJson(ID);
+      }
+
+
+
+
       a(subNavParrent).children('.sub-menu').toggleClass('display');
     });
 
-});
+    function getParentJson(ID) {
+      var workUri = 'http://' + window.location.hostname + '/wp-json/taxonomies/category/terms/' + ID;
+      a.getJSON(workUri, function(data, status) {
+        var catName = data.name,
+          catDescription = data.description;
+        a('.entry-header h1').html(catName);
+        a('.entry-content').html(catDescription);
+      })
+    }
 
+
+
+});
