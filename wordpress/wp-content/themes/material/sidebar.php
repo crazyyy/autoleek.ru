@@ -14,7 +14,7 @@
 
       <div class="widget widget_popular_post">
         <h5 class="widget-title">Популярные записи</h5>
-        <div class="popular-post-container">
+        <ul class="popular-post-container">
         <?php
           $args = array(
             'showposts'      => '7',
@@ -29,14 +29,14 @@
         <?php if ( have_posts() ) : ?>
           <?php while ( have_posts()) : the_post(); $ranking++; ?>
 
-            <div class="popular-post-container">
+            <li class="popular-post-container">
               <a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
-            </div>
+            </li>
 
           <?php endwhile; else: endif;
           wp_reset_query(); ?>
 
-        </div><!-- popular-post-container -->
+        </ul><!-- popular-post-container -->
       </div><!-- widget_popular_post -->
 
 
