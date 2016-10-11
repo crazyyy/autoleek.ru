@@ -24,11 +24,11 @@
 		<?php else : ?>
 			<h1><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
 		<?php endif; ?>
-
 	</header> <!-- end entry-header -->
 
 	<!-- Article content -->
 	<div class="entry-content">
+
 		<?php
 			if ( is_search() ) {
 				the_excerpt();
@@ -36,10 +36,20 @@
 				the_content( __( 'Continue reading &rarr;', 'material' ) );
 
 				wp_link_pages();
-			}
-		?>
+			}	
+?>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Внутренний статьи -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2990418069799616"
+     data-ad-slot="5858721689"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 	</div> <!-- end entry-content -->
-
+<script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script><div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="small" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir,gplus" data-yashareTheme="counter"></div>	
 	<!-- Article footer -->
 	<footer class="entry-footer">
 	<?php 
@@ -50,6 +60,6 @@
 			}*/
 		material_post_meta2();
 
-		?>	
+		?>
 	</footer> <!-- end entry-footer -->
 </article>

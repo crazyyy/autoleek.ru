@@ -11,7 +11,6 @@
 <?php if ( is_active_sidebar( 'sidebar-1' ) ) : ?>
   <aside class="sidebar col-md-3" role="complementary">
       <?php dynamic_sidebar( 'sidebar-1' ); ?>
-
       <div class="widget widget_popular_post">
         <h5 class="widget-title">Популярные записи</h5>
         <ul class="popular-post-container">
@@ -38,8 +37,6 @@
 
         </ul><!-- popular-post-container -->
       </div><!-- widget_popular_post -->
-
-
       <?php
         // check if the repeater field has rows of data
         if( have_rows('video') ):

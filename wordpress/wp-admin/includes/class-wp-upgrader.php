@@ -972,11 +972,14 @@ class Plugin_Upgrader extends WP_Upgrader {
 
 		// Check the folder contains at least 1 valid plugin.
 		$plugins_found = false;
-		foreach ( glob( $working_directory . '*.php' ) as $file ) {
-			$info = get_plugin_data($file, false, false);
-			if ( !empty( $info['Name'] ) ) {
-				$plugins_found = true;
-				break;
+		$files = glob( $working_directory . '*.php' );
+		if ( $files ) {
+			foreach ( $files as $file ) {
+				$info = get_plugin_data( $file, false, false );
+				if ( ! empty( $info['Name'] ) ) {
+					$plugins_found = true;
+					break;
+				}
 			}
 		}
 
@@ -2327,8 +2330,12 @@ class File_Upload_Upgrader {
 			if ( ! ( ( $uploads = wp_upload_dir() ) && false === $uploads['error'] ) )
 				wp_die( $uploads['error'] );
 
-			$this->filename = $_GET[$urlholder];
+			$this->filename = sanitize_file_name( $_GET[ $urlholder ] );
 			$this->package = $uploads['basedir'] . '/' . $this->filename;
+
+			if ( 0 !== strpos( realpath( $this->package ), realpath( $uploads['basedir'] ) ) ) {
+				wp_die( __( 'Please select a file' ) );
+			}
 		}
 	}
 

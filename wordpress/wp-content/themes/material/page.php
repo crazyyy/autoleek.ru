@@ -29,6 +29,7 @@
 					<?php the_content(); ?>
 
 					<?php wp_link_pages(); ?>
+
 				</div> <!-- end entry-content -->
 
 				<!-- Article footer -->
